@@ -1,0 +1,42 @@
+.button-standard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "New York", Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-align: center;
+    background-color: var(--primary-color);
+    border: none;
+    transition: all .2s ease-out;
+    justify-content: center;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.button-standard:hover {
+    background-color: #feb2c8;
+  }
+
+.button-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "New York", Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-align: center;
+    background-color: var(--primary-color);
+    border: none;
+    transition: all .2s ease-out;
+    justify-content: center;
+    margin: 0 auto;
+    cursor: pointer;
+    text-decoration: underline;
+}

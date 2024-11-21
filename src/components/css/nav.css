@@ -1,0 +1,485 @@
+/* Header */
+.header {
+    background-color: #fff;
+    min-height: 90px;
+}
+
+.header-wrapper {
+    padding: 0;
+}
+
+.announcement-bar {
+    background-color: var(--primary-color);
+    display: block;
+    text-align: center;
+}
+
+.announcement-bar__message {
+    padding: 10px 30px;
+    color:black
+}
+
+.header-container {
+    background-color: #fff;
+    padding: 15px 0;
+}
+
+.grid-table {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.grid__item {
+    display: flex;
+    vertical-align: middle;
+    float: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slide In Nav */
+.overlay__menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateX(-250px);
+    visibility: hidden;
+    transition: all 0.35s ease-out;
+    z-index: 10;
+}
+
+.overlay__nav {
+    padding: 30px 15px;
+}
+
+.overlay__nav .submenu__list {
+    border: 1px solid #040404;
+    padding: 0 10px;
+    background-color: #fff;
+    margin-top:10px;
+}
+
+
+/* Slide in Nav Active */
+.overlay__menu.active {
+    visibility: visible;
+    transform: translateX(0);
+    transition: all 0.35s ease-out;
+}
+
+.main-content,
+.header {
+    transition: transform 0.35s ease-out;
+}
+
+/* Sibling selector */
+.overlay__menu.active + .header,
+.overlay__menu.active + .header + .main-content{
+    transform: translateX(250px);
+}
+
+
+
+/* Ham */
+.ham-menu {
+    display: none;
+}
+
+.ham-menu__toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+}
+
+.ham-menu__icon {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.ham-menu__icon::before,
+.ham-menu__icon::after {
+  content: '';
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.ham-menu__icon::before {
+    top: -8px;
+  }
+  
+.ham-menu__icon::after {
+top: 8px;
+}
+
+/* Motion */
+.ham-menu__icon.active {
+    background-color: transparent;
+  }
+  
+.ham-menu__icon.active::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  
+.ham-menu__icon.active::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+
+/* End of Ham */
+
+/* Slide In */
+.site-header__logo {
+    width: 33.33%;
+}
+
+.site-header__logo h1 {
+    font-size: 2.4em;
+
+    font-size: 1.5625em;
+}
+
+.site-header__logo .site-header__logo-link{
+    font-style: normal;
+}
+
+.menu {
+    text-align: right;
+}
+
+.menu__item {
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px;
+    white-space: nowrap;
+    font-size: .875em;
+
+}
+
+.menu__list {
+    display: flex;
+    align-items: end;
+    justify-content: right;    
+}
+
+.menu__item--compressed{
+    padding: 15px 7.5px;
+    padding-bottom: 13px;
+}
+
+.menu__item-search--compressed {
+    padding-bottom: 16px;
+}
+
+.menu__item--compressed i {
+    margin: 4px;
+}
+
+.menu__button {
+    transition: color .2s;
+    line-height: inherit;
+    font-size: 14px;
+    display: flex;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #040404;
+    font-family: "New York", Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    border: none;
+    background-color: #fff;
+    align-items: center;
+}
+
+.menu__button i{
+    color: #040404
+}
+
+a:hover {
+    color:rgba(4, 4, 4, 0.75)
+}
+
+.submenu__title {
+    letter-spacing: 0px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #040404;
+    text-align: center;
+    font-size: 1em;
+}
+
+.submenu__list{
+    margin-top: 15px;
+}
+
+.submenu {
+    width: 150px;
+    position: absolute;
+    margin-top: 10px;
+    z-index: 10;
+    background-color: #fff;
+    text-align: left;
+    transition: all ease-in-out .2s;
+    overflow: hidden;
+    max-height: 0px;
+    visibility: hidden;
+}
+
+.submenu.active {
+    padding: 10px 15px;
+    border: 1px solid #040404;
+    opacity:1;
+    max-height: 500px;
+    visibility: visible;
+}
+
+.gg-chevron-down {
+    transition: transform 0.3s ease; 
+}
+.gg-chevron-down.active {
+    transform: scale(var(--ggs, 0.8)) rotate(180deg);
+}
+
+
+
+.menu__item:nth-child(2) .submenu {
+    transform: translateX(-10px);
+}
+
+
+.submenu h4 {
+    letter-spacing: 0px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #040404;
+    text-align: center;
+    font-size: 1em;
+}
+
+.submenu a {
+    text-transform: none;
+}
+
+.submenu__item {
+    padding-bottom: 5px;
+}
+
+
+@media(max-width: 57.5rem) {
+    h1 {
+        text-align: center;
+    }
+    
+    .grid-table {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .site-header__logo {
+        width:100%;
+    }
+
+
+    
+    .info__wrapper {
+        justify-content: center;
+    }
+
+    .info__details {
+        flex-basis: 50%;
+    }
+}
+
+@media(max-width:48rem) {
+    .menu.grid__item {
+        display: none;
+    }
+    
+    .ham-menu {
+        display: block;
+
+        left:20px;
+    }
+}
+
+@media(max-width: 36rem) {
+    .info__wrapper {
+        display: block;
+    }
+
+    .gallery__grid {
+        grid-template-rows: 130px 130px 130px 130px;
+        gap: 10px;
+    }
+
+    .item-1 .gallery__image,
+    .item-2 .gallery__image{
+        width: 100%;
+        height: auto;
+    }
+
+    .gallery__image{
+        width: 100%;
+        height: auto;
+    }
+
+    .gallery__item {
+        grid-column: span 6;
+        text-align: center;
+    }
+
+    .footer__wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap:10px
+    }
+
+    .newsletter__form-group {
+        flex-direction: column;
+        height: 100%;
+        align-items: baseline;
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+
+    .newsletter__input-container {
+        width: 100%;
+    }
+
+    .newsletter__input,.newsletter__select {
+        width: 100%;
+        height: 100%;
+    }
+
+    .newsletter__select {
+        margin: 0 5px;
+        padding: 0;
+        height: 48px;
+    }
+    
+    .newsletter__button {
+        width: 80%
+    }
+
+    .newsletter__form-group--checkbox,
+    .newsletter__form-group--btn {
+        align-items: center;
+    }
+
+
+}
+
+
+
+/* Profile Dropdown */
+.profile-container {
+    position: relative;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: -90px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 4px;
+    z-index: 10;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-dropdown .profile-username {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .profile-dropdown .fabulous {
+    color: rgb(211, 191, 75);
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .profile-dropdown .profile-settings-link {
+    text-align: center;
+    margin-top: 0.5rem;
+    display: block;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: medium;
+    font-family: Quicksand, sans-serif;
+    background-color: #fff;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .profile-settings-link:hover {
+    color:rgba(4, 4, 4, 0.75)
+  }
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  .profile-photo {
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    object-fit: cover;
+  }
+  
+  .profile-username {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  
+  
+  .gg-profile {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+
+
+@media(max-width: 25rem) {
+    .gallery__item {
+        grid-column: span 12;
+    }
+
+    .gallery-wrapper {
+        padding: 80px 10px 40px 10px;
+    }
+
+    .gallery__grid {
+        grid-template-rows: repeat(8,130px);
+    }
+
+
+}

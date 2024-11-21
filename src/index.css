@@ -1,0 +1,122 @@
+:root {
+  font-family: Quicksand, sans-serif, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --primary-color: #fe759c;
+  --secondary-color: #feb2c8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a ,span{
+  vertical-align: middle;
+  text-decoration: none;
+  color: #040404;
+  font-family: "New York",Iowan Old Style,Apple Garamond,Baskerville,Times New Roman,Droid Serif,Times,Source Serif Pro,serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+body, p, input{
+  font-family: Quicksand, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+h1,h2,h3,h4 {
+  font-weight: 400;
+  font-family: "New York", Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  font-style: normal;
+  letter-spacing: .1em;
+  text-transform: uppercase
+}
+
+.hr {
+  display: block;
+  margin: 20px auto;
+  border-width: 1px 0 0 0;
+  width: 50px;
+  height: 0;
+  clear: both;
+  border-top: solid black;
+  border-width: 1px 0 0;
+  margin: 30px auto;
+}
+
+.content-wrapper {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "New York", Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  font-size: .8125em;
+  text-align: center;
+  background-color: var(--primary-color);
+  border: none;
+  transition: all .2s ease-out;
+  justify-content: center;
+}
+
+.btn:hover {
+  background-color: #feb2c8;
+}
+
+
+/* Single Page Header and Div format */
+.content-wrapper {
+  padding: 80px 30px 40px 30px;
+}
+
+.section__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.section__header-title{
+  display: block;
+  font-family: Old Standard TT, serif;
+  margin: 0 0 .5em;
+  font-size: 1.8em;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #000000;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+
+@media (prefers-reduced-motion) {
+  * {
+      transition: none !important;
+      transform: none !important;
+  }
+}

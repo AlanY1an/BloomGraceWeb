@@ -1,0 +1,138 @@
+/* Info Section */
+.info__image {
+    background-image: url(./images/info.jpg);
+    padding: 90px 0;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.info__wrapper {
+    display: flex;
+    
+}
+
+.info__details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 35px;
+    text-align: center;
+    flex-basis: 33.33%;
+    flex-wrap: wrap;
+    min-height: 350px;
+    gap:15px
+}
+
+.info__button {
+    background-color: #201f1f;
+    color: white
+}
+
+.info__button:hover {
+    background-color: var(--primary-color);
+    color:#201f1f
+}
+
+
+/* Newsletter */
+.newsletter {
+    padding: 60px 0;
+    background-color: #f6f6f6;
+}
+.newsletter__wrapper {
+    text-align: center;
+    justify-content: center;
+}
+
+.newsletter__header {
+    margin: 50px 0 60px;
+}
+
+.newsletter__title {
+    font-family: Old Standard TT,serif;
+    margin-bottom: 20px;
+}
+
+.newsletter__description {
+    color: #201f1f;
+}
+
+.newsletter__button {
+    width: 40%;
+    height: 60px;
+    margin: 0 auto;
+    font-size: medium;
+    cursor: pointer;
+}
+
+
+
+.section-hr {
+    margin: 60px auto;
+}
+
+
+@media(max-width: 57.5rem) {
+    h1 {
+        text-align: center;
+    }
+
+    .info__wrapper {
+        justify-content: center;
+    }
+
+    .info__details {
+        flex-basis: 50%;
+    }
+}
+
+
+@media(max-width: 36rem) {
+    .info__wrapper {
+        display: block;
+    }
+
+    .footer__wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap:10px
+    }
+
+    .newsletter__form-group {
+        flex-direction: column;
+        height: 100%;
+        align-items: baseline;
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+
+    .newsletter__input-container {
+        width: 100%;
+    }
+
+    .newsletter__input,.newsletter__select {
+        width: 100%;
+        height: 100%;
+    }
+
+    .newsletter__select {
+        margin: 0 5px;
+        padding: 0;
+        height: 48px;
+    }
+    
+    .newsletter__button {
+        width: 80%
+    }
+
+    .newsletter__form-group--checkbox,
+    .newsletter__form-group--btn {
+        align-items: center;
+        cursor: pointer;
+    }
+
+
+}
+
+
