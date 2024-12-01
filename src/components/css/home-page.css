@@ -1,7 +1,7 @@
 /* Info Section */
 .info__image {
     background-image: url(../../../public/images/info.jpg);
-    padding: 90px 0;
+    padding: 0;
     background-size: cover;
     background-position-y: center;
 }
@@ -72,6 +72,12 @@
     margin: 60px auto;
 }
 
+@media (min-width: 1500px) {
+    .info__image {
+        background-image: url(../../../public/images/info.jpg);
+        padding: 5.6rem 0;
+    }
+  }
 
 @media(max-width: 57.5rem) {
     h1 {

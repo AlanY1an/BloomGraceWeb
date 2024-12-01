@@ -167,12 +167,12 @@ const Header = ({ navToHash, profileData }) => {
                       <div className={`submenu ${activeMenu === 'occasions' ? 'active' : ''}`}>
                         <span className="submenu__title">All Occasions</span>
                         <ul className="submenu__list">
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Anniversary</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Birthday</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Congratulation</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Graduation</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Sympathy</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Thank you</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Anniversary</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Birthday</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Congratulation</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Graduation</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Sympathy</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Thank you</a></li>
                         </ul>
                       </div>
                   </li>

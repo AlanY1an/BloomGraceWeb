@@ -5,6 +5,7 @@ import HomePage from './components/HomePage';
 import GalleryPage from './components/GalleryPage';
 import AboutPage from './components/AboutPage';
 import ProfilePage from './components/ProfilePage';
+import OccasionPage from './components/OccasionPage';
 
 
 const App = () => {
@@ -59,6 +60,8 @@ const App = () => {
         );
       case '#about':
         return <AboutPage />;
+      case '#occasions':
+        return <OccasionPage />
       default:
         return <HomePage />;
     }
