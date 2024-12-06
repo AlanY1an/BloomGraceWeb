@@ -49,12 +49,18 @@ const HomePage = () => {
             <hr className="hr" />
 
             {/* Open modal */}
-            <Button type="button" visual="link" className="newsletter__button" onClick={() => dialogRef.current.showModal()}>
+            <Button type="button" visual="link" className="newsletter__button" aria-label="Open subscription form" onClick={() => dialogRef.current.showModal()}>
               Subscribe
             </Button>
 
-            <dialog ref={dialogRef} className="modal">
-              <h2>Subscribe</h2>
+            <dialog 
+              ref={dialogRef} 
+              className="modal"
+              aria-labelledby="dialog-title"
+              aria-describedby="dialog-description"
+            >
+              <h2 id="dialog-title">Subscribe</h2>
+              <p id="dialog-description">Fill out the form below to subscribe to our newsletter.</p>
               <form autoComplete="off" className="newsletter__form" action="/register" method="POST" onSubmit={handleFormSubmit}>
                 <div className="newsletter__notes">
                   <p>Required fields are marked <span className="required"> * </span></p>
@@ -65,7 +71,7 @@ const HomePage = () => {
                   <label htmlFor="name" className="newsletter__label">Name <span className="required"> * </span></label>
                   <div className="newsletter__input-container">
                     <input type="text" id="name" name="name" className="newsletter__input newsletter__input--name" placeholder="Your full name" />
-                    <div className="newsletter__error--name"></div>
+                    <div className="newsletter__error--name" aria-live="polite"></div>
                   </div>
                 </div>
 
@@ -73,8 +79,8 @@ const HomePage = () => {
                 <div className="newsletter__form-group">
                   <label htmlFor="email" className="newsletter__label">Email <span className="required"> * </span></label>
                   <div className="newsletter__input-container">
-                    <input type="text" id="email" name="email" className="newsletter__input newsletter__input--email" placeholder="Your email address" />
-                    <div className="newsletter__error--email"></div>
+                    <input type="email" id="email" name="email" className="newsletter__input newsletter__input--email" placeholder="Your email address" />
+                    <div className="newsletter__error--email" aria-live="polite"></div>
                   </div>
                 </div>
 
@@ -82,8 +88,8 @@ const HomePage = () => {
                 <div className="newsletter__form-group">
                   <label htmlFor="confirm-email" className="newsletter__label">Confirm Email <span className="required"> * </span></label>
                   <div className="newsletter__input-container">
-                    <input type="text" id="confirm-email" name="confirm-email" className="newsletter__input newsletter__input--confirm-email" placeholder="Confirm your email address" />
-                    <div className="newsletter__error--confirm-email"></div>
+                    <input type="email" id="confirm-email" name="confirm-email" className="newsletter__input newsletter__input--confirm-email" placeholder="Confirm your email address" />
+                    <div className="newsletter__error--confirm-email" aria-live="polite"></div>
                   </div>
                 </div>
 
@@ -111,7 +117,7 @@ const HomePage = () => {
                 </div>
               </form>
 
-              {feedback && <p className="feedback-message">{feedback}</p>}
+              {feedback && <p className="feedback-message"  aria-live="assertive">{feedback}</p>}
 
               {/* Close modal button */}
               <Button type="button" visual="button" className="modal-close--btn" onClick={handleCloseModal}>X</Button>

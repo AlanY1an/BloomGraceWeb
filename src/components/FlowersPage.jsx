@@ -1,26 +1,24 @@
 import React from 'react';
-import occasions from '../data/occasions';
-import './css/occasion.css';
+import flowers from '../data/flowers';
+import './css/flowers.css';
 
-const OccasionPage = (navToHash) => {
-
+const FlowerPage = (navToHash) => {
   return (
-    <main className="occasion main-content">
-      <div className="content-wrapper occasion-wrapper">
-        <div className="occasion__header section__header">
-          <h2 className="occasion__title section__header-title">Occasions</h2>
+    <main className="flower main-content">
+      <div className="content-wrapper flower-wrapper">
+        <div className="flower__header section__header">
+          <h2 className="flower__title section__header-title">Flowers</h2>
           <hr className="hr" />
         </div>
 
-        {occasions.map((occasion) => (
-          <div key={occasion.category} className="occasion-category">
-            <h3 className="occasion-category__title">{occasion.category}</h3>
+        {flowers.map((flowerCategory) => (
+          <div key={flowerCategory.category} className="flower-category">
+            <h3 className="flower-category__title">{flowerCategory.category}</h3>
             <div className="grid-container">
-              {occasion.products.map((product) => (
+              {flowerCategory.products.map((product) => (
                 <div key={product.id} className="grid-item">
                   <a
-                    href={`#occasions/${occasion.category}/${product.id}`}
-
+                    href={`#flowers/${flowerCategory.category}/${product.id}`}
                     className="grid-item__link"
                   >
                     <div className="grid-item__image-wrapper">
@@ -41,4 +39,4 @@ const OccasionPage = (navToHash) => {
   );
 };
 
-export default OccasionPage;
+export default FlowerPage;

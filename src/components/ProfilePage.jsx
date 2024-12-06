@@ -3,11 +3,11 @@ import App from '../App';
 import Button from './Button';
 import './css/profile.css';
 
-const ProfilePage = ( {profileData,setProfileData} ) => {
-
+const ProfilePage = ({ profileData, setProfileData }) => {
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
+  const [showAvatarSelector, setShowAvatarSelector] = useState(false);
 
   const handleEdit = (field) => {
     setEditingField(field);
@@ -20,7 +20,7 @@ const ProfilePage = ( {profileData,setProfileData} ) => {
       ...profileData,
       isDogFree: e.target.checked,
     });
-  }
+  };
 
   // Validation here
   const handleSave = (field) => {
@@ -34,16 +34,16 @@ const ProfilePage = ( {profileData,setProfileData} ) => {
         setValidationMessage("You're kidding, right?");
         return;
       }
-    } 
-    
+    }
+
     let valueToSave = tempValue;
     if (field === 'actualName' && !tempValue.trim()) {
-        valueToSave = profileData.username;
+      valueToSave = profileData.username;
     }
 
     setProfileData({
-        ...profileData,       
-        [field]: valueToSave, 
+      ...profileData,
+      [field]: valueToSave,
     });
     setEditingField(null);
     setValidationMessage('');
@@ -55,93 +55,109 @@ const ProfilePage = ( {profileData,setProfileData} ) => {
     setValidationMessage('');
   };
 
-  
+  const handleAvatarChange = (avatar) => {
+    setProfileData({
+      ...profileData,
+      profilePic: `profile-images/${avatar}`,
+    });
+    setShowAvatarSelector(false);
+  };
+
   const renderField = (label, field) => (
     <>
-        <div className="profile-row">
+      <div className="profile-row">
         <div className="profile-label">{label}:</div>
-        
+
         <div className="profile-value">
-            {editingField === field ? (
+          {editingField === field ? (
             <input
-                type="text"
-                value={tempValue}
-                onChange={(e) => setTempValue(e.target.value)}
+              type="text"
+              value={tempValue}
+              onChange={(e) => setTempValue(e.target.value)}
             />
-            ) : (
-            <>
-                {profileData[field]}
-            </>
-            )}
+          ) : (
+            <>{profileData[field]}</>
+          )}
         </div>
-        
+
         <div className="profile-actions">
-            {editingField === field ? (
+          {editingField === field ? (
             <>
-                <Button
-                className="profile-save"
-                onClick={() => handleSave(field)}
-                >
+              <Button className="profile-save" onClick={() => handleSave(field)}>
                 Save
-                </Button>
-                <Button
-                className="profile-cancel"
-                onClick={handleCancel}
-                >
+              </Button>
+              <Button className="profile-cancel" onClick={handleCancel}>
                 Cancel
-                </Button>
+              </Button>
             </>
-            ) : (
-                <Button
-                className="profile-edit"
-                onClick={() => handleEdit(field)}
-                >
-                Edit
-                </Button>
-            )}  
+          ) : (
+            <Button className="profile-edit" onClick={() => handleEdit(field)}>
+              Edit
+            </Button>
+          )}
         </div>
-        </div>
-        {editingField === field && validationMessage && (
+      </div>
+      {editingField === field && validationMessage && (
         <div className="validation-message">{validationMessage}</div>
-        )}
+      )}
     </>
   );
 
-
   return (
-    <section className="profile-page">
-        <div className="content-wrapper">
-            <div className="profile-header section__header">
-                <h2 className = "profile__title">Profile</h2>
-                <hr className="hr" />
-            </div>
-
-            <div className="profile-table">
-                <div className="profile-image">
-                    <img
-                    src={profileData.profilePic}
-                    alt="Profile"
-                    className="profile-image__photo"
-                    />
-                </div>
-
-                {renderField('Username', 'username')}
-
-                {renderField('Actual Name', 'actualName')}
-
-                <div className="profile-row profile-row--checkbox">
-                  <input
-                    type="checkbox"
-                    id="verified-dog-free"
-                    checked={profileData.isDogFree}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label htmlFor="verified-dog-free">Verified Dog Free</label>
-                </div>
-            </div>
-
+    <main className="profile-page main-content">
+      <div className="content-wrapper">
+        <div className="profile-header section__header">
+          <h2 className="profile__title">Profile</h2>
+          <hr className="hr" />
         </div>
-    </section>
+
+        <div className="profile-table">
+          <div className="profile-image">
+            <img
+              src={profileData.profilePic}
+              alt="Profile"
+              className="profile-image__photo"
+            />
+            <div className="avatar-banner" onClick={() => setShowAvatarSelector(!showAvatarSelector)}>
+              Edit
+            </div>
+          </div>
+
+          {showAvatarSelector && (
+            <div className="avatar-selector-banner">
+              <h3>Select Your Avatar</h3>
+              <div className="avatar-options">
+                {['profile-1.jpg', 'profile-2.jpg', 'profile-3.jpg'].map((avatar) => (
+                  <img
+                    key={avatar}
+                    src={`profile-images/${avatar}`}
+                    alt="Avatar Option"
+                    className={`avatar-option ${
+                      profileData.profilePic.includes(avatar) ? 'selected' : ''
+                    }`}
+                    onClick={() => handleAvatarChange(avatar)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {renderField('Username', 'username')}
+
+          {renderField('Actual Name', 'actualName')}
+
+          <div className="profile-row profile-row--checkbox">
+            <input
+              type="checkbox"
+              id="verified-dog-free"
+              checked={profileData.isDogFree}
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor="verified-dog-free">Verified Dog Free</label>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

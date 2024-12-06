@@ -6,7 +6,9 @@ import GalleryPage from './components/GalleryPage';
 import AboutPage from './components/AboutPage';
 import ProfilePage from './components/ProfilePage';
 import OccasionPage from './components/OccasionPage';
-
+import ProductDetailPage from './components/ProductDetailPage';
+import FlowerPage from './components/FlowersPage';
+import CartPage from './components/CartPage';
 
 const App = () => {
   const [page, setPage] = useState(document.location.hash || '#home'); 
@@ -19,7 +21,33 @@ const App = () => {
     actualName: 'Yian Ge',
   });
 
-  // Handle backward/forward 
+  // items in Cart
+  const [cart, setCart] = useState([]);
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
+  // Update quantity from the cart Page
+  const updateCartQuantity = (id, newQuantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+      .filter((item) => item.quantity > 0) 
+    );
+  };
+  
+
   useEffect(
     ()=>{
       function handlePageChange(){
@@ -46,6 +74,14 @@ const App = () => {
   };
 
   const renderPage = () => {
+    if (page.startsWith('#occasions/')) {
+      const [, category, productId] = page.split('/');
+      return <ProductDetailPage category={category} productId={productId} addToCart={addToCart} />;
+    }
+    if (page.startsWith('#flowers/')) {
+      const [, category, productId] = page.split('/');
+      return <ProductDetailPage category={category} productId={productId}  addToCart={addToCart}  />;
+    }
     switch (page) {
       case '#home':
         return <HomePage />;
@@ -62,6 +98,10 @@ const App = () => {
         return <AboutPage />;
       case '#occasions':
         return <OccasionPage />
+      case '#flowers':
+        return <FlowerPage />;
+      case '#cart':
+        return <CartPage  cart={cart} updateCartQuantity={updateCartQuantity} />;
       default:
         return <HomePage />;
     }

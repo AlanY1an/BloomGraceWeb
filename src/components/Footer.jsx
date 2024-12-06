@@ -26,7 +26,7 @@ const Footer = () => (
         
         <div className="footer__about">
           <span className="about__content">© 2024,</span>
-          <a href="index.html"><span>Bloom & Grace</span></a>
+          <a href="#home"><span>Bloom & Grace</span></a>
         </div>
 
       </div>

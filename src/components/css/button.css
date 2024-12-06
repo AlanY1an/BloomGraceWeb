@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-.button-standard:hover {
+.button-link:hover,.button-standard:hover {
     background-color: #feb2c8;
   }
 

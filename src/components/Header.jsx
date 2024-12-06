@@ -1,26 +1,39 @@
-// import React from 'react';
-
-// const Header = ({ setPage }) => (
-//   <header>
-//     <h1>My React App</h1>
-//     <nav>
-//       <button onClick={() => setPage('text')}>Text Page</button>
-//       <button onClick={() => setPage('cards')}>Card Page</button>
-//       <button onClick={() => setPage('panels')}>Panel Page</button>
-//     </nav>
-//   </header>
-// );
-
 // export default Header;
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './css/header.css';
 import './css/icon.css';
+import './css/dialog.css';
 
 const Header = ({ navToHash, profileData }) => {
   const [isHamMenuOpen, setIsHamMenuOpen] = useState(false);
   const [isSlideInMenuOpen, setIsSlideInMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(false);
+  const dialogRef = useRef();
+  const dialogRefSmall = useRef();
+  
+  // Close the dialog when click other place
+  const handleClickOutside = (event) => {
+    if ((dialogRef.current && dialogRef.current === event.target) ||(dialogRefSmall.current && dialogRefSmall.current === event.target)  ) {
+      dialogRef.current.close();
+      dialogRefSmall.current.close();
+    }
+  };
 
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+
+  const handleMenuClick = (event) => {
+    navToHash(event);
+    closeAllMenus();
+    toggleSlideInMenu();
+    toggleHamMenu();
+  };
+  
   const toggleHamMenu = () => {
     setIsHamMenuOpen(!isHamMenuOpen);
     setIsSlideInMenuOpen(false); 
@@ -37,14 +50,14 @@ const Header = ({ navToHash, profileData }) => {
   const closeAllMenus = () => {
     setActiveMenu(false);
   };
-
+  // close the all the menu if click somewhere else
   useEffect(() => {
     if (isHamMenuOpen || isSlideInMenuOpen || activeMenu) {
       const handleClickOutside = (e) => {
         if (
-          !e.target.closest('.menu') && // 非主菜单点击
-          !e.target.closest('.overlay__menu') && // 非 Slide-In 菜单点击
-          !e.target.closest('.menu__drop-down') // 非下拉菜单按钮点击
+          !e.target.closest('.menu') && 
+          !e.target.closest('.overlay__menu') && 
+          !e.target.closest('.menu__drop-down') 
         ) {
           closeAllMenus();
         }
@@ -57,77 +70,49 @@ const Header = ({ navToHash, profileData }) => {
     }
   }, [isHamMenuOpen, isSlideInMenuOpen, activeMenu]);
 
+
+
   return (
     <>
       {/* // <!-- Slide In --> */}
-      <div className={`overlay__menu  ${isSlideInMenuOpen ? 'active':''}`}>
-          <nav className="overlay__nav">
+      <div
+        className={`overlay__menu ${isSlideInMenuOpen ? 'active' : ''}`}
+        aria-hidden={!isSlideInMenuOpen}
+        role="dialog"
+      >
+          <nav className="overlay__nav" aria-label="Main Navigation">
               <ul className="overlay__list">
+
                   <li className="menu__item">
-                      <a href="/exclusives.html" className="menu__link">Exclusives</a>
-                  </li>
-                  <li className="menu__item">
-                      <a href="/occasions.html" className="menu__link">Occasions</a>
+                      <a href="#occasions" className="menu__link" onClick={handleMenuClick}>Occasions</a>
                       <ul className="submenu__list">
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Anniversary</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Birthday</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Congratulation</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Graduation</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Sympathy</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Thank you</a>
-                          </li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Anniversary</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Birthday</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Congratulation</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Graduation</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Sympathy</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Thank you</a></li>
                       </ul>
 
                   </li>
                   <li className="menu__item">
-                      <a href="/flowers.html" className="menu__link">All Flowers</a>
+                      <a href="#flowers" className="menu__link onClick={handleMenuClick}">All Flowers</a>
                       <ul className="submenu__list">
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Daisies</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Hydrangeas</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Lilies</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Calla Lilies</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Plants</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Roses</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Stock</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Sunflowers</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Tulips</a>
-                          </li>
-                          <li className="submenu__item">
-                              <a href="/products.html" className="submenu__link">Bells of Ireland</a>
-                          </li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Daisies</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Hydrangeas</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Lilies</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Calla Lilies</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Plants</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Roses</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Stock</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Sunflowers</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Tulips</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Bells of Ireland</a></li>
                       </ul>
                           
                   </li>
                   <li className="menu__item">
-                      <a href="/about.html" className="menu__link">About</a>
+                      <a href="#about" className="menu__link" onClick={handleMenuClick}>About</a>
                   </li>
               </ul>
           </nav>
@@ -153,11 +138,11 @@ const Header = ({ navToHash, profileData }) => {
                 <ul className="menu__list">
 
                   <li className="menu__item">
-                    <a href="#home" className="menu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Home</a>
+                    <a href="#home" className="menu__link" onClick={handleMenuClick}>Home</a>
                   </li>
 
                   <li className="menu__item">
-                    <a href="#gallery" className="menu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Gallery</a>
+                    <a href="#gallery" className="menu__link" onClick={handleMenuClick}>Gallery</a>
                   </li>
 
                   <li className="menu__item">
@@ -167,38 +152,43 @@ const Header = ({ navToHash, profileData }) => {
                       <div className={`submenu ${activeMenu === 'occasions' ? 'active' : ''}`}>
                         <span className="submenu__title">All Occasions</span>
                         <ul className="submenu__list">
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Anniversary</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Birthday</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Congratulation</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Graduation</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Sympathy</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>Thank you</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Anniversary</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Birthday</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Congratulation</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Graduation</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Sympathy</a></li>
+                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Thank you</a></li>
                         </ul>
                       </div>
                   </li>
 
                   <li className="menu__item">
-                    <button className="menu__button menu__drop-down" onClick={() => toggleMenu('flowers')}>
-                      All Flowers <i className={`gg-chevron-down ${activeMenu === 'flowers' ? 'active' : ''}`}></i>
-                    </button>
+                  <button
+                    className="menu__button menu__drop-down"
+                    aria-expanded={activeMenu === 'flowers'}
+                    aria-controls="flowers-submenu"
+                    onClick={() => toggleMenu('flowers')}
+                  >
+                    All Flowers <i className={`gg-chevron-down ${activeMenu === 'flowers' ? 'active' : ''}`}></i>
+                  </button>
                       <div className={`submenu ${activeMenu === 'flowers' ? 'active' : ''}`}>
                         <span className="submenu__title">All Flowers</span>
                         <ul className="submenu__list">
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Daisies</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Hydrangeas</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Lilies</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Calla Lilies</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Plants</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Roses</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Stock</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Sunflowers</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Tulips</a></li>
-                          <li className="submenu__item"><a href="/products.html" className="submenu__link">Bells of Ireland</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Daisies</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Hydrangeas</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Lilies</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Calla Lilies</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Plants</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Roses</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Stock</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Sunflowers</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Tulips</a></li>
+                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Bells of Ireland</a></li>
                         </ul>
                       </div>
                   </li>
 
-                  <li className="menu__item"><a href="#about" className="menu__link" onClick={(e)=> {navToHash(e);closeAllMenus();}}>About</a></li>
+                  <li className="menu__item"><a href="#about" className="menu__link" onClick={handleMenuClick}>About</a></li>
 
                   <li className="menu__item menu__item--compressed menu__item--profile">
                     <div className="profile-container">
@@ -239,7 +229,7 @@ const Header = ({ navToHash, profileData }) => {
                             href='#profile'
                             className="profile-settings-link"
                             onClick={()=>{
-                              toggleProfileMenu()
+                              closeAllMenus()
                               navToHash()
                               }
                             }
@@ -251,10 +241,91 @@ const Header = ({ navToHash, profileData }) => {
                     </div>
                   </li>
 
-                  <li className="menu__item menu__item--compressed menu__item-search--compressed"><a href="/search.html" className="menu__link"><i className="gg-search"></i></a></li>
-                  <li className="menu__item menu__item--compressed"><a href="/mycart.html" className="menu__link"><i className="gg-shopping-cart"></i></a></li>
+                  <li className="menu__item menu__item--compressed menu__item-search--compressed"><button href="" onClick={(event) => {event.stopPropagation(); dialogRef.current.showModal();}} className="menu__link button__link"><i className="gg-search"></i></button></li>
+
+                  <dialog ref={dialogRef} className='search-box'>
+                    <div>
+                      <input type="text" name="serach" id="serach" className='search-input'/>
+                    </div>
+                  </dialog>
+                  <li className="menu__item menu__item--compressed"><a href="#cart" className="menu__link"><i className="gg-shopping-cart"></i></a></li>
                 </ul>
               </nav>
+
+              {/* smaller screen */}
+              <nav className="mobile-menu">
+                <li className="menu__item menu__item--compressed menu__item--profile">
+                  <div className="profile-container">
+                    <a
+                      href="#profile"
+                      className="menu__link"
+                      onClick={(e) => {
+                        navToHash();
+                        e.preventDefault();
+                      }}
+                    >
+                      <i className="gg-profile" aria-hidden="true"></i>
+                      <span className="sr-only">Profile</span>
+                    </a>
+
+                    {activeMenu === 'profile' && (
+                      <div className="profile-dropdown">
+                        <div className="profile-info">
+                          <img
+                            src={profileData.profilePic}
+                            alt="Profile"
+                            className="profile-photo"
+                          />
+                          <p
+                            className={`profile-username ${
+                              profileData.isDogFree ? 'fabulous' : ''
+                            }`}
+                          >
+                            {profileData.username}
+                          </p>
+                        </div>
+                        <a
+                          href="#profile"
+                          className="profile-settings-link"
+                          onClick={() => {
+                            closeAllMenus();
+                            navToHash();
+                          }}
+                        >
+                          Profile Settings
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </li>
+
+                <li className="menu__item menu__item--compressed menu__item-search--compressed">
+                  <button
+                    href=""
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      dialogRefSmall.current.showModal();
+                    }}
+                    className="menu__link button__link"
+                  >
+                    <i className="gg-search"></i>
+                  </button>
+                </li>
+
+                <dialog ref={dialogRefSmall} className="search-box">
+                  <div>
+                    <input type="text" name="search" id="search" className="search-input" />
+                  </div>
+                </dialog>
+
+                <li className="menu__item menu__item--compressed">
+                  <a href="#cart" className="menu__link">
+                    <i className="gg-shopping-cart"></i>
+                  </a>
+                </li>
+              </nav>
+
+              
             </div>
           </div>
         </div>

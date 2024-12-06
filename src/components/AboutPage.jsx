@@ -2,16 +2,16 @@ import React from 'react';
 import './css/about.css';
 
 const AboutPage = () => (
-  <section className="about">
+  <main className="about main-content">
     <div className="content-wrapper about-wrapper">
       <div className="about__header section__header">
-        <h2 className="about__title section__header-title">About Us</h2>
+        <h1 className="about__title section__header-title">About Us</h1>
         <hr className="hr" />
       </div>
 
       <div className="pane-container">
         {/* Our Mission Panel */}
-        <div className="panel">
+        <div className="panel" aria-labelledby="our mission">
           <img src="./images/item-1.jpg" alt="Our Mission" className="panel__image" />
           <div className="panel__text">
             <h2 className="panel__title">Our Mission</h2>
@@ -22,7 +22,7 @@ const AboutPage = () => (
         </div>
 
         {/* Our History Panel */}
-        <div className="panel">
+        <div className="panel" aria-labelledby="our history">
           <div className="panel__text">
             <h2 className="panel__title">Our History</h2>
             <p className="panel__description">
@@ -33,7 +33,7 @@ const AboutPage = () => (
         </div>
 
         {/* Meet the Team Panel */}
-        <div className="panel">
+        <div className="panel" aria-labelledby="our team">
           <img src="./images/item-2.jpg" alt="Meet the Team" className="panel__image" />
           <div className="panel__text">
             <h2 className="panel__title">Meet the Team</h2>
@@ -44,7 +44,7 @@ const AboutPage = () => (
         </div>
       </div>
     </div>
-  </section>
+  </main>
 );
 
 export default AboutPage;

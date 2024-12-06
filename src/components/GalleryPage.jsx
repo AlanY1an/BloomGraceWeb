@@ -4,7 +4,7 @@ import './css/gallery.css';
 const GalleryPage = ( { navToHash } ) => {
 
   return (
-    <section className="gallery">
+    <main className="gallery main-content">
       <div className="content-wrapper gallery-wrapper">
         <div className="gallery__header section__header">
           <h2 className="gallery__title section__header-title">Our Catalog</h2>
@@ -12,7 +12,7 @@ const GalleryPage = ( { navToHash } ) => {
         </div>
         <div className="gallery__grid">
           <div className="gallery__item item-1">
-            <a href="#home" className="gallery__link" onClick={navToHash}>
+            <a href="#home" className="gallery__link" onClick={()=>navToHash()}>
               <img src="./images/item-1.jpg" alt="Red Rose Arrangements" className="gallery__image" />
               <div className="gallery__caption">HomePage</div>
             </a>
@@ -61,7 +61,7 @@ const GalleryPage = ( { navToHash } ) => {
           </div>
         </div>
       </div>
-    </section>
+    </main>
   );
 };
 

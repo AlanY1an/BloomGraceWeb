@@ -183,11 +183,11 @@ top: 8px;
 
 .menu__item--compressed{
     padding: 15px 7.5px;
-    padding-bottom: 13px;
+    padding-bottom: 14px;
 }
 
 .menu__item-search--compressed {
-    padding-bottom: 16px;
+    padding-bottom: 12px;
 }
 
 .menu__item--compressed i {
@@ -208,6 +208,11 @@ top: 8px;
     border: none;
     background-color: #fff;
     align-items: center;
+}
+
+.menu__button:hover {
+    color:rgba(4, 4, 4, 0.75);
+    cursor:pointer;
 }
 
 .menu__button i{
@@ -285,6 +290,18 @@ a:hover {
     padding-bottom: 5px;
 }
 
+.button__link {
+    border: 0;
+}
+
+.button__link:hover {
+    color:rgba(4, 4, 4, 0.75);
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+}
 
 @media(max-width: 57.5rem) {
     h1 {
@@ -314,6 +331,15 @@ a:hover {
 @media(max-width:48rem) {
     .menu.grid__item {
         display: none;
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        flex-direction: row;
+        border-radius: 8px;
+        z-index: 1000;
+        width: 200px;
     }
     
     .ham-menu {
