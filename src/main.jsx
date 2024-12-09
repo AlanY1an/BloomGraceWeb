@@ -5,6 +5,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <a href="#main-content" class="skiplink">Skip to main content</a>
     <App />
   </StrictMode>,
 )

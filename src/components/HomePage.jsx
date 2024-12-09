@@ -7,15 +7,60 @@ const HomePage = () => {
   const dialogRef = useRef();
   const [feedback, setFeedback] = useState(""); 
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    confirmEmail: '',
+  });
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required.';
+    } else if (formData.name.length < 3) {
+      newErrors.name = 'Name must be at least 3 characters.';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Invalid email format.';
+    }
+
+    if (formData.confirmEmail !== formData.email) {
+      newErrors.confirmEmail = 'Emails do not match.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      setFeedback("Thank you for subscribing!");
+      setErrors({});
+    } else {
+      setFeedback("");
+    }
+  };
+
   const handleCloseModal = () => {
     setFeedback(""); 
     dialogRef.current.close();
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setFeedback("Thank you for subscribing!"); 
-  };
 
   return (
     <main className="main-content">
@@ -61,7 +106,7 @@ const HomePage = () => {
             >
               <h2 id="dialog-title">Subscribe</h2>
               <p id="dialog-description">Fill out the form below to subscribe to our newsletter.</p>
-              <form autoComplete="off" className="newsletter__form" action="/register" method="POST" onSubmit={handleFormSubmit}>
+              <form autoComplete="off" className="newsletter__form" onSubmit={handleFormSubmit}>
                 <div className="newsletter__notes">
                   <p>Required fields are marked <span className="required"> * </span></p>
                 </div>
@@ -69,30 +114,47 @@ const HomePage = () => {
                 {/* Name */}
                 <div className="newsletter__form-group">
                   <label htmlFor="name" className="newsletter__label">Name <span className="required"> * </span></label>
-                  <div className="newsletter__input-container">
-                    <input type="text" id="name" name="name" className="newsletter__input newsletter__input--name" placeholder="Your full name" />
-                    <div className="newsletter__error--name" aria-live="polite"></div>
-                  </div>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="newsletter__input newsletter__input--name"
+                    placeholder="Your full name"
+                  />
+                  {errors.name && <div className="newsletter__error">{errors.name}</div>}
                 </div>
 
                 {/* Email */}
                 <div className="newsletter__form-group">
                   <label htmlFor="email" className="newsletter__label">Email <span className="required"> * </span></label>
-                  <div className="newsletter__input-container">
-                    <input type="email" id="email" name="email" className="newsletter__input newsletter__input--email" placeholder="Your email address" />
-                    <div className="newsletter__error--email" aria-live="polite"></div>
-                  </div>
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="newsletter__input newsletter__input--email"
+                    placeholder="Your email address"
+                  />
+                  {errors.email && <div className="newsletter__error">{errors.email}</div>}
                 </div>
 
                 {/* Confirm Email */}
                 <div className="newsletter__form-group">
-                  <label htmlFor="confirm-email" className="newsletter__label">Confirm Email <span className="required"> * </span></label>
-                  <div className="newsletter__input-container">
-                    <input type="email" id="confirm-email" name="confirm-email" className="newsletter__input newsletter__input--confirm-email" placeholder="Confirm your email address" />
-                    <div className="newsletter__error--confirm-email" aria-live="polite"></div>
-                  </div>
+                  <label htmlFor="confirmEmail" className="newsletter__label">Confirm Email <span className="required"> * </span></label>
+                  <input
+                    type="text"
+                    id="confirmEmail"
+                    name="confirmEmail"
+                    value={formData.confirmEmail}
+                    onChange={handleInputChange}
+                    className="newsletter__input newsletter__input--confirm-email"
+                    placeholder="Confirm your email address"
+                  />
+                  {errors.confirmEmail && <div className="newsletter__error">{errors.confirmEmail}</div>}
                 </div>
-
                 {/* Tier */}
                 <div className="newsletter__form-group">
                   <label htmlFor="tier" className="newsletter__label">Select Subscription Tier</label>
@@ -110,14 +172,12 @@ const HomePage = () => {
                   </label>
                   <input type="checkbox" id="wants-spam" name="wants-spam" className="newsletter__checkbox" />
                 </div>
-
-                {/* Submit */}
-                <div className="newsletter__form-group newsletter__form-group--btn ">
+                <div className="newsletter__form-group newsletter__form-group--btn">
                   <Button type="submit" visual="link" className="newsletter__button btn">Submit</Button>
                 </div>
               </form>
 
-              {feedback && <p className="feedback-message"  aria-live="assertive">{feedback}</p>}
+              {feedback && <p className="feedback-message">{feedback}</p>}
 
               {/* Close modal button */}
               <Button type="button" visual="button" className="modal-close--btn" onClick={handleCloseModal}>X</Button>

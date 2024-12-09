@@ -75,7 +75,23 @@
     }
 }
 
-
+.occasion-filter {
+    margin-bottom: 20px;
+  }
+  
+  .occasion-filter__label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .occasion-filter__select {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  
 
 @media(max-width: 36rem) {
     .gallery__grid {

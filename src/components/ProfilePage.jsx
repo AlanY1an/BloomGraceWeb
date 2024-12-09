@@ -3,11 +3,57 @@ import App from '../App';
 import Button from './Button';
 import './css/profile.css';
 
+const stateCityMap = {
+  TX: ['Houston', 'Dallas', 'Austin', 'San Antonio'],
+  CA: ['Los Angeles', 'San Francisco', 'San Diego', 'Sacramento'],
+  NY: ['New York City', 'Buffalo', 'Rochester', 'Albany'],
+};
+
 const ProfilePage = ({ profileData, setProfileData }) => {
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
+
+  const [selectedState, setSelectedState] = useState(profileData.state || '');
+  const [selectedCity, setSelectedCity] = useState(profileData.city || '');
+
+  // Address
+  // 
+  const handleStateChange = (e) => {
+    const state = e.target.value;
+    setSelectedState(state);
+    setSelectedCity('');
+  };
+
+
+  const handleCityChange = (e) => {
+    setSelectedCity(e.target.value);
+  };
+
+  const saveAddress = () => {
+    if (!selectedState || !selectedCity) {
+      setValidationMessage('Please select both a state and a city.');
+      return;
+    }
+    setProfileData({
+      ...profileData,
+      state: selectedState,
+      city: selectedCity,
+    });
+    setEditingField(null);
+    setValidationMessage('');
+  };
+
+  const cancelEdit = () => {
+    setSelectedState(profileData.state || '');
+    setSelectedCity(profileData.city || '');
+    setEditingField(null);
+    setValidationMessage('');
+  };
+
+  // 
+
 
   const handleEdit = (field) => {
     setEditingField(field);
@@ -146,6 +192,75 @@ const ProfilePage = ({ profileData, setProfileData }) => {
 
           {renderField('Actual Name', 'actualName')}
 
+          {/* Address */}
+          <div className="profile-row">
+            <div className="profile-label">Address:</div>
+            <div className="profile-value">
+              {profileData.state && profileData.city
+                ? `${profileData.city}, ${profileData.state}`
+                : 'Not set'}
+            </div>
+            <div className="profile-actions">
+              <Button className="profile-edit" onClick={() => setEditingField('address')}>
+                Edit
+              </Button>
+            </div>
+          </div>
+
+          {/* Address*/}
+          {editingField === 'address' && (
+            <>
+                        <div className="profile-row">
+              <div className="profile-label">State:</div>
+              <div className="profile-value">
+                <select value={selectedState} onChange={handleStateChange}>
+                  <option value="">Select a state</option>
+                  {Object.keys(stateCityMap).map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="profile-row">
+              <div className="profile-label">City:</div>
+              <div className="profile-value">
+                <select
+                  value={selectedCity}
+                  onChange={handleCityChange}
+                  disabled={!selectedState}
+                >
+                  <option value="">Select a city</option>
+                  {selectedState &&
+                    stateCityMap[selectedState].map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="profile-row profile-row-actions">
+              <div className="profile-actions">
+                <Button className="profile-save" onClick={saveAddress}>
+                  Save
+                </Button>
+                <Button className="profile-cancel" onClick={cancelEdit}>
+                  Cancel
+                </Button>
+              </div>
+              {validationMessage && (
+                <div className="validation-message">{validationMessage}</div>
+              )}
+            </div>
+            </>
+            
+          )}
+
+
           <div className="profile-row profile-row--checkbox">
             <input
               type="checkbox"
@@ -155,6 +270,9 @@ const ProfilePage = ({ profileData, setProfileData }) => {
             />
             <label htmlFor="verified-dog-free">Verified Dog Free</label>
           </div>
+
+
+
         </div>
       </div>
     </main>

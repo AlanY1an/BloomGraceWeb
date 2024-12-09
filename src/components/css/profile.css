@@ -122,3 +122,8 @@
     color: white;
   }
   
+
+  .profile-row-actions {
+    justify-items: center;
+    justify-content: center;
+  }

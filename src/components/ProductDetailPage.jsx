@@ -58,7 +58,7 @@ const ProductDetailPage = ({ category, productId, addToCart}) => {
               <h2 className="product-detail__title">{product.name}</h2>
               
             </div>
-            <p className="product-detail__price">{product.price}</p>
+            <p className="product-detail__price">${product.price}</p>
             <p className="product-detail__category">Category: {category}</p>
             <p className="product-detail__description">
               This is a placeholder description for {product.name}. You can add more details about the product here.

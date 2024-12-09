@@ -4,7 +4,7 @@ import './css/header.css';
 import './css/icon.css';
 import './css/dialog.css';
 
-const Header = ({ navToHash, profileData }) => {
+const Header = ({ navToHash, profileData, setSelectedCategory}) => {
   const [isHamMenuOpen, setIsHamMenuOpen] = useState(false);
   const [isSlideInMenuOpen, setIsSlideInMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(false);
@@ -27,11 +27,12 @@ const Header = ({ navToHash, profileData }) => {
   }, []);
 
 
-  const handleMenuClick = (event) => {
+  const handleMenuClick = (event,category) => {
     navToHash(event);
     closeAllMenus();
     toggleSlideInMenu();
     toggleHamMenu();
+    setSelectedCategory(category);
   };
   
   const toggleHamMenu = () => {
@@ -152,12 +153,13 @@ const Header = ({ navToHash, profileData }) => {
                       <div className={`submenu ${activeMenu === 'occasions' ? 'active' : ''}`}>
                         <span className="submenu__title">All Occasions</span>
                         <ul className="submenu__list">
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Anniversary</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Birthday</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Congratulation</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Graduation</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Sympathy</a></li>
-                          <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={handleMenuClick}>Thank you</a></li>
+                        <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Anniversary')}>Anniversary</a></li>
+                        <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Birthday')}>Birthday</a></li>
+                        <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Congratulation')}>Congratulation</a></li>
+                        <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Graduation')}>Graduation</a></li>
+                        <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Sympathy')}>Sympathy</a></li>
+                        <li className="submenu__item"><a href="#occasions" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Thank you')}>Thank you</a></li>
+
                         </ul>
                       </div>
                   </li>
@@ -174,16 +176,17 @@ const Header = ({ navToHash, profileData }) => {
                       <div className={`submenu ${activeMenu === 'flowers' ? 'active' : ''}`}>
                         <span className="submenu__title">All Flowers</span>
                         <ul className="submenu__list">
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Daisies</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Hydrangeas</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Lilies</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Calla Lilies</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Plants</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Roses</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Stock</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Sunflowers</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Tulips</a></li>
-                          <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={handleMenuClick}>Bells of Ireland</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Daisies')}>Daisies</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Hydrangeas')}>Hydrangeas</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Lilies')}>Lilies</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Calla Lilies')}>Calla Lilies</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Plants')}>Plants</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Roses')}>Roses</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Stock')}>Stock</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Sunflowers')}>Sunflowers</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Tulips')}>Tulips</a></li>
+                        <li className="submenu__item"><a href="#flowers" className="submenu__link" onClick={(e) => handleMenuClick(e, 'Bells of Ireland')}>Bells of Ireland</a></li>
+
                         </ul>
                       </div>
                   </li>

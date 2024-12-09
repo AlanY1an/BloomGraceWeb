@@ -2,6 +2,23 @@
   padding: 20px;
 }
 
+.flower-filter {
+  margin-bottom: 20px;
+}
+
+.flower-filter__label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.flower-filter__select {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
 .content-wrapper {
   max-width: 1200px;
   margin: 0 auto;

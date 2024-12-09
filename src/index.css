@@ -120,3 +120,20 @@ h1,h2,h3,h4 {
       transform: none !important;
   }
 }
+
+.skiplink {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  z-index: 1000;
+  transform: translateY(-1000%);
+  transition: transform 0.3s ease;
+}
+
+.skiplink:focus {
+  transform: translateY(0);
+}

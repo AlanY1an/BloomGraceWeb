@@ -12,13 +12,15 @@ import CartPage from './components/CartPage';
 
 const App = () => {
   const [page, setPage] = useState(document.location.hash || '#home'); 
-
+  const [selectedCategory, setSelectedCategory] = useState('All');
   // Profile data state
   const [profileData, setProfileData] = useState({
     username: 'Yian',
     isDogFree: true,
     profilePic: 'profile-images/profile-1.jpg',
     actualName: 'Yian Ge',
+    state: '',
+    city: '',
   });
 
   // items in Cart
@@ -97,9 +99,9 @@ const App = () => {
       case '#about':
         return <AboutPage />;
       case '#occasions':
-        return <OccasionPage />
+        return <OccasionPage selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
       case '#flowers':
-        return <FlowerPage />;
+        return <FlowerPage selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />;
       case '#cart':
         return <CartPage  cart={cart} updateCartQuantity={updateCartQuantity} />;
       default:
@@ -109,7 +111,7 @@ const App = () => {
 
   return (
     <div>
-      <Header navToHash={navToHash} profileData = {profileData} /> 
+      <Header navToHash={navToHash} profileData = {profileData}  setSelectedCategory={setSelectedCategory} /> 
       {renderPage()}
       <Footer />
     </div>
